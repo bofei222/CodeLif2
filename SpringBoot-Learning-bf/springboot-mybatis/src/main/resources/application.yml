@@ -1,0 +1,26 @@
+
+spring:
+  datasource:
+    username: root
+    password: Pa55Word
+    url: jdbc:hive2://47.94.23.139:22050/kudu_hnit_dev;auth=noSasl
+    driver-class-name: org.apache.hive.jdbc.HiveDriver
+
+mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bf.springbootmybatis.entity
+logging:
+  level:
+    com.bf.springbootmybatis.mapper: debug
+#    com.bf.springbootmybatis.mapper: trace
+#    org:
+#      springframework:
+#        web: info
+#    org:
+#      mybatis: debug
+
+
+server:
+  port: 8081
