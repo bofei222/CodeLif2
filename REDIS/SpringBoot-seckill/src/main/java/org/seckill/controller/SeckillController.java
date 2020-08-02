@@ -49,21 +49,27 @@ public class SeckillController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    @RequestMapping("/set")
+    @RequestMapping("/hash")
     @ResponseBody
-    public String set() {
+    public Seckill hash() {
         redisTemplate.opsForValue().set("a", 1);
         redisTemplate.opsForHash().put("user1", "name", "aa");
+
         Seckill seckill = new Seckill();
         seckill.setSeckillId(123);
         seckill.setCostPrice(new BigDecimal("123"));
         seckill.setPrice(new BigDecimal("321"));
         seckill.setCreateTime(new Date());
+
         ObjectMapper oMapper = new ObjectMapper();
         Map<String, Object> map = oMapper.convertValue(seckill, Map.class);
 
-redisTemplate.opsForHash().putAll("seckill123", map);
-        return "page/seckill";
+        redisTemplate.opsForHash().putAll("seckill123", map); // mset
+        Map seckill123 = redisTemplate.opsForHash().entries("seckill123") ;// hgetall
+        Seckill secKillObj = oMapper.convertValue(seckill123, Seckill.class);
+        System.out.println(secKillObj);
+
+        return secKillObj;
     }
 
     @RequestMapping("/get")
