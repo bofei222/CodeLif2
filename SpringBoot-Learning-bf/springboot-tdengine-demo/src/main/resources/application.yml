@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:TAOS://10.88.26.83:0/db
+    driver-class-name: com.taosdata.jdbc.TSDBDriver
+    username: root
+    password: taosdata
+  redis:
+    host: 10.88.26.83
+    port: 6379
+    password: 123456
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 10
+        max-active: 100
+        max-wait: -1
+
+
+
+
+
